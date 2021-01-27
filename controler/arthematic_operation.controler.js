@@ -1,3 +1,4 @@
+const e = require("express");
 const arthematic_operations = require("../model/arthematic_operation.model");
 
 exports.user_create = function (req, res, next) {
@@ -62,4 +63,24 @@ exports.userGet_info = function (req, res, next) {
     // });
     res.send(users)
   });
+};
+
+
+exports.user_get_by_id=function(req,res,next)
+{
+    let id=req.query.id
+    arthematic_operations.findById(id,function(err,users)
+    {
+        if(err)
+        {
+            console.log(err);
+            res.send(err)
+        }
+        else{
+            console.log(users.num1);
+            res.send(users)
+        }
+
+    });
+
 };
