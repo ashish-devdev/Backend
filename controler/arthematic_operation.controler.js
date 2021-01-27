@@ -4,46 +4,53 @@ exports.user_create = function (req, res, next) {
   const arr = new Array(req.body.arr);
   var num1, num2;
   let result;
+try{
 
-  for (let i = 0; i < arr[0].length; i++) {
-    num1 = arr[0][i].num1;
-    num2 = arr[0][i].num2;
-    if (arr[0][i].operation == "add") {
-    
-      result = num1 + num2;
-      let user = new arthematic_operations({
-        num1: num1,
-        num2: num2,
-        operation: "add",
-        result: result,
-      });
-      user.save(function (err) {
-        if (err) {
-          return next(err);
+    for (let i = 0; i < arr[0].length; i++) {
+        num1 = arr[0][i].num1;
+        num2 = arr[0][i].num2;
+        if (arr[0][i].operation == "add") {
+            
+            result = num1 + num2;
+            let user = new arthematic_operations({
+                num1: num1,
+                num2: num2,
+                operation: "add",
+                result: result,
+            });
+            user.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+            });
+        } else if (arr[0][i].operation == "mul") {
+            
+            result = num1 * num2;
+            let user = new arthematic_operations({
+                num1: num1,
+                num2: num2,
+                operation: "mul",
+                result: result,
+            });
+            user.save(function (err) {
+                if (err) {
+                    return next(err);
+                }
+            });
         }
-      });
-    } else if (arr[0][i].operation == "mul") {
-   
-      result = num1 * num2;
-      let user = new arthematic_operations({
-        num1: num1,
-        num2: num2,
-        operation: "mul",
-        result: result,
-      });
-      user.save(function (err) {
-        if (err) {
-          return next(err);
-        }
-      });
+        
+        
+        
+        res.send("User Created successfully");
     }
 
-   
-
-    res.send("User Created successfully");
-  }
-
-
+}
+catch(e){
+    console.log(e);
+}    
+    
+    
+    
 };
 
 exports.userGet_info = function (req, res, next) {
