@@ -38,12 +38,12 @@ try{
                 }
             });
         }
-        
-        
-        
-        res.send("User Created successfully");
-    }
 
+        
+        
+        
+    }
+    res.send("user created successfully")
 }
 catch(e){
     console.log(e);
