@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+require('dotenv').config()
 
 //  DB connection
-mongoose.connect("mongodb+srv://ashish:ashish@cluster0.jfm0m.mongodb.net/arthematics", {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -9,9 +10,11 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+
 const express = require("express");
 const product = require("./router/arthematic"); //imports routes
 const app = express();
+
 const cors = require("cors");
 const fileupload = require("express-fileupload");
 

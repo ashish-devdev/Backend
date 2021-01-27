@@ -7,11 +7,11 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 
 // Enter copied or downloaded access id and secret here
-const ID = 'AKIAJYGZEGGOOBDYGKJA';
-const SECRET = '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';
+const ID = process.env.AWS_ID;
+const SECRET = process.env.AWS_SECRET;
 
 // Enter the name of the bucket that you have created here
-const BUCKET_NAME = 'testmages123';
+const BUCKET_NAME = process.env.AWS_BUCKET;
 
 exports.user_create = function (req, res, next) {
   const arr = new Array(req.body.arr);
