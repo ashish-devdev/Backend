@@ -13,10 +13,12 @@ const express = require("express");
 const product = require("./router/arthematic"); //imports routes
 const app = express();
 const cors = require("cors");
+const fileupload = require("express-fileupload");
 
 const port = 3002;
 const bodyParser = require("body-parser");
 app.use(cors());
+app.use(fileupload());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

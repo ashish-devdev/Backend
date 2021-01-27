@@ -1,5 +1,17 @@
 const e = require("express");
 const arthematic_operations = require("../model/arthematic_operation.model");
+const Busboy = require('busboy');
+
+
+const fs = require('fs');
+const AWS = require('aws-sdk');
+
+// Enter copied or downloaded access id and secret here
+const ID = 'AKIAJYGZEGGOOBDYGKJA';
+const SECRET = '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';
+
+// Enter the name of the bucket that you have created here
+const BUCKET_NAME = 'testmages123';
 
 exports.user_create = function (req, res, next) {
   const arr = new Array(req.body.arr);
@@ -84,3 +96,36 @@ exports.user_get_by_id=function(req,res,next)
     });
 
 };
+
+
+exports.post_image=function(req,res,next)
+{
+
+  
+    const img=req.files;
+    console.log(req.files)
+    
+    // Initializing S3 Interface
+    const s3 = new AWS.S3({
+        accessKeyId: ID,
+        secretAccessKey: SECRET
+    });
+    // console.log(s3)
+    
+    const params = {
+        Bucket: BUCKET_NAME,
+        Key:img.image.name, // file name you want to save as
+        Body: img.image.data
+    };
+
+ console.log(params)
+    // Uploading files to the bucket
+    s3.upload(params, function(err, data) {
+        if (err) {
+            res.send(err)
+        }
+       
+        res.send(data.Location)
+    });
+
+}
